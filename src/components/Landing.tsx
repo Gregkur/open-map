@@ -1,28 +1,36 @@
 import { useState } from "react";
-import apiCall from "../hooks/useApiCall";
+import { apiCall } from "../utils/apiCall";
+
+import Features from "./Features";
 
 const Landing = () => {
   const [formData, setFormData] = useState({
-    min_lon: "",
-    min_lat: "",
-    max_lon: "",
-    max_lat: "",
+    min_lon: 13.40515,
+    min_lat: 52.5077,
+    max_lon: 13.40563,
+    max_lat: 52.50796,
   });
-  const { min_lon, min_lat, max_lon, max_lat } = formData;
+  const [features, setFeatures] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
-  const API = "https://www.openstreetmap.org/api/0.6/map/?bbox=";
+  const { min_lon, min_lat, max_lon, max_lat } = formData;
 
   const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    apiCall(min_lon, min_lat, max_lon, max_lat);
+    setLoading(true);
+    const data = await apiCall(min_lon, min_lat, max_lon, max_lat);
+    setFeatures(data);
+    setLoading(false);
+    setShowForm(true);
   };
 
   return (
-    <>
+    <div className="container-main">
       <form onSubmit={handleSubmit}>
         <input
           type="number"
@@ -52,12 +60,12 @@ const Landing = () => {
           value={max_lat}
           onChange={(e) => handleChange(e)}
         />
-        <button type="submit" value="Submit">
+        <button type="submit" value="Submit" className="btn">
           Submit
         </button>
       </form>
-    </>
+      {showForm && <Features features={features} loading={loading} />}
+    </div>
   );
 };
 export default Landing;
-// min_lon,min_lat,max_lon,max_lat.
