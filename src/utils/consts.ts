@@ -1,0 +1,1 @@
+export const API = "https://www.openstreetmap.org/api/0.6/map/?bbox=";

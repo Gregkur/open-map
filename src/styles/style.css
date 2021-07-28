@@ -1,38 +1,40 @@
 .container {
-  width: 90%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1em;
-  margin-top: 1em;
-}
-.container-main {
   display: flex;
   width: 100%;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
-.container-row {
-  border: 1px solid black;
-  margin-top: 2em;
+
+table {
+  border: 1px solid #0000005c;
 }
-.container-cell {
+.table-container {
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  margin-top: 1em;
+}
+.table-cell {
   padding: 6px;
   font-size: 0.8em;
   display: flex;
 }
-table {
-  border: 1px solid #0000005c;
-}
+
 form {
   display: flex;
   margin-top: 1em;
   justify-content: space-evenly;
-  width: 70%;
+  width: 50%;
+}
+input {
+  width: 91.5px;
 }
 input:focus-visible {
   outline: none;
 }
+
 .btn {
   background: transparent;
   color: black;
@@ -45,4 +47,11 @@ input:focus-visible {
 }
 .btn:hover {
   opacity: 0.6;
+}
+
+.spinner {
+  width: "300px";
+  margin: "auto";
+  display: "block";
+  box-shadow: "unset";
 }
